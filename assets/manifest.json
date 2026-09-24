@@ -1,0 +1,245 @@
+{
+  "width": 1278,
+  "height": 1231,
+  "order": [
+    "cape",
+    "lower",
+    "torso",
+    "head",
+    "eyes",
+    "hair"
+  ],
+  "base": {
+    "cape": "assets/base/cape.png",
+    "lower": "assets/base/lower.png",
+    "torso": "assets/base/torso.png",
+    "head": "assets/base/head.png",
+    "eyes": "assets/base/eyes.png",
+    "hair": "assets/base/hair.png"
+  },
+  "poses": {
+    "lower": [
+      "assets/poses/lower-0.png",
+      "assets/poses/lower-1.png",
+      "assets/poses/lower-2.png",
+      "assets/poses/lower-3.png"
+    ],
+    "torso": [
+      "assets/poses/torso-0.png",
+      "assets/poses/torso-1.png",
+      "assets/poses/torso-2.png",
+      "assets/poses/torso-3.png"
+    ],
+    "hair": [
+      "assets/poses/hair-0.png",
+      "assets/poses/hair-1.png",
+      "assets/poses/hair-2.png",
+      "assets/poses/hair-3.png"
+    ],
+    "cape": [
+      "assets/poses/cape-0.png",
+      "assets/poses/cape-1.png",
+      "assets/poses/cape-2.png",
+      "assets/poses/cape-3.png"
+    ],
+    "eyes": [
+      "assets/poses/eyes-0.png",
+      "assets/poses/eyes-1.png",
+      "assets/poses/eyes-2.png",
+      "assets/poses/eyes-3.png"
+    ],
+    "head": [
+      "assets/poses/head-0.png",
+      "assets/poses/head-1.png",
+      "assets/poses/head-2.png",
+      "assets/poses/head-3.png"
+    ]
+  },
+  "validation": {
+    "originalPixelDifferences": 0
+  },
+  "method": "Source pixels for rest; registered imagegen drawings for poses. No runtime rotations, mesh deformation or per-frame resizing.",
+  "eyeUnderlay": "assets/base/eye-underlay.png",
+  "bounds": {
+    "assets/base/cape.png": [
+      253,
+      587,
+      292,
+      393
+    ],
+    "assets/base/lower.png": [
+      253,
+      673,
+      708,
+      471
+    ],
+    "assets/base/torso.png": [
+      354,
+      475,
+      625,
+      360
+    ],
+    "assets/base/head.png": [
+      508,
+      240,
+      350,
+      268
+    ],
+    "assets/base/eyes.png": [
+      628,
+      300,
+      217,
+      98
+    ],
+    "assets/base/hair.png": [
+      276,
+      90,
+      720,
+      600
+    ],
+    "assets/poses/lower-0.png": [
+      435,
+      672,
+      525,
+      451
+    ],
+    "assets/poses/lower-1.png": [
+      478,
+      672,
+      426,
+      477
+    ],
+    "assets/poses/lower-2.png": [
+      447,
+      675,
+      521,
+      459
+    ],
+    "assets/poses/lower-3.png": [
+      484,
+      675,
+      435,
+      408
+    ],
+    "assets/poses/torso-0.png": [
+      484,
+      438,
+      474,
+      387
+    ],
+    "assets/poses/torso-1.png": [
+      509,
+      438,
+      447,
+      373
+    ],
+    "assets/poses/torso-2.png": [
+      515,
+      438,
+      635,
+      271
+    ],
+    "assets/poses/torso-3.png": [
+      511,
+      438,
+      490,
+      355
+    ],
+    "assets/poses/hair-0.png": [
+      271,
+      94,
+      717,
+      597
+    ],
+    "assets/poses/hair-1.png": [
+      268,
+      94,
+      708,
+      597
+    ],
+    "assets/poses/hair-2.png": [
+      294,
+      95,
+      731,
+      581
+    ],
+    "assets/poses/hair-3.png": [
+      323,
+      94,
+      653,
+      543
+    ],
+    "assets/poses/cape-0.png": [
+      249,
+      530,
+      359,
+      417
+    ],
+    "assets/poses/cape-1.png": [
+      178,
+      529,
+      425,
+      418
+    ],
+    "assets/poses/cape-2.png": [
+      264,
+      530,
+      349,
+      394
+    ],
+    "assets/poses/cape-3.png": [
+      171,
+      493,
+      433,
+      433
+    ],
+    "assets/poses/eyes-0.png": [
+      637,
+      313,
+      210,
+      95
+    ],
+    "assets/poses/eyes-1.png": [
+      630,
+      328,
+      220,
+      70
+    ],
+    "assets/poses/eyes-2.png": [
+      641,
+      362,
+      213,
+      19
+    ],
+    "assets/poses/eyes-3.png": [
+      635,
+      320,
+      208,
+      80
+    ],
+    "assets/poses/head-0.png": [
+      563,
+      180,
+      319,
+      331
+    ],
+    "assets/poses/head-1.png": [
+      562,
+      182,
+      318,
+      321
+    ],
+    "assets/poses/head-2.png": [
+      552,
+      201,
+      322,
+      317
+    ],
+    "assets/poses/head-3.png": [
+      577,
+      190,
+      323,
+      300
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Éditeur de collage</title>
+<style>
+:root{color-scheme:dark;--bg:#142025;--panel:#1d2c30;--line:#3c5051;--text:#edf2e4;--muted:#b0c2b9;--green:#c8e9a3;--sel:#ffd27a}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 system-ui}main{max-width:1400px;margin:auto;padding:20px}
+header{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px;margin-bottom:16px}.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--green)}h1{font-size:24px;margin:4px 0 0}h2{font-size:14px;margin:0 0 10px}p,small{color:var(--muted)}a{color:var(--green)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px}.stage{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line)}.toolbar .sep{flex:1}.viewport{overflow:auto;height:calc(100vh - 210px);min-height:420px;background:repeating-conic-gradient(#2a3b37 0 25%,#253531 0 50%) 0 0/24px 24px;cursor:grab}.viewport.dragging{cursor:grabbing}
+canvas{display:block;image-rendering:pixelated;margin:auto}.hint{padding:8px 12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+aside{display:flex;flex-direction:column;gap:12px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+button,select,input{font:inherit}button,select{color:var(--text);background:#2b4140;border:1px solid #59716a;border-radius:7px;padding:6px 10px;cursor:pointer}button:hover{border-color:var(--green)}button[aria-pressed=true],button.primary{color:#223026;background:var(--green);border-color:var(--green)}button:disabled{opacity:.45;cursor:default}
+.buttons{display:flex;flex-wrap:wrap;gap:6px}.field{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:8px 0}.field input[type=number]{width:80px;color:var(--text);background:#243634;border:1px solid #59716a;border-radius:6px;padding:4px 6px}input[type=checkbox],input[type=range]{accent-color:var(--green)}
+.layers{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}.layers li{display:flex;align-items:center;gap:6px;padding:5px 6px;border:1px solid transparent;border-radius:8px;cursor:pointer}.layers li:hover{background:#243634}.layers li.selected{border-color:var(--sel);background:#2e3b2c}.layers .name{flex:1}.layers button{padding:2px 7px;font-size:12px}.layers .pos{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.small{font-size:12px;color:var(--muted)}#status{min-height:1.4em;color:var(--green);font-size:12px}#error{color:#ffc3aa}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.viewport{height:70vh}}@media(max-width:540px){main{padding:12px}}
+</style></head><body><main>
+<header><div><div class="eyebrow">SAUT · COLLAGE DES MEMBRES</div><h1>Placer chaque membre, phase par phase</h1></div><div class="buttons"><a href="saut.html">← Revenir au saut</a></div></header>
+<div class="layout">
+<section class="stage">
+ <div class="toolbar"><div class="buttons" id="phases" role="tablist" aria-label="Phases"></div><span class="sep"></span><button id="play">▶ Aperçu</button><label class="small">Zoom <input id="zoom" type="range" min="0.25" max="2" step="0.05" value="0.55"></label></div>
+ <div class="viewport" id="viewport"><canvas id="stage" aria-label="Collage de la phase"></canvas></div>
+ <div class="hint">Clique sur un membre pour le choisir, fais-le glisser pour le déplacer. Flèches : 1 px (Maj : 10 px). Ctrl+Z / Ctrl+Y : annuler / rétablir. Touches 1 à 4 : changer de phase.</div>
+</section>
+<aside>
+ <section class="panel"><h2>Couches <span class="small">(en haut = devant)</span></h2><ul class="layers" id="layers"></ul>
+  <label class="field"><span>Bras du torse devant la tête et les cheveux</span><input id="front-arms" type="checkbox"></label></section>
+ <section class="panel" id="detail"><h2 id="detail-title">Membre</h2>
+  <label class="field"><span>Dessin utilisé</span><select id="src"></select></label>
+  <label class="field"><span>Décalage X</span><input id="dx" type="number" step="1"></label>
+  <label class="field"><span>Décalage Y</span><input id="dy" type="number" step="1"></label>
+  <div class="buttons"><button id="reset-layer">Remettre à zéro</button><button id="copy-prev">Copier de la phase précédente</button><button id="copy-all">Appliquer à toutes les phases</button></div></section>
+ <section class="panel"><h2>Aides</h2>
+  <label class="field"><span>Phase précédente en transparence</span><input id="onion" type="checkbox" checked></label>
+  <label class="field"><span>Opacité</span><input id="onion-alpha" type="range" min="0.1" max="0.8" step="0.05" value="0.3"></label>
+  <label class="field"><span>Contour du membre choisi</span><input id="outline" type="checkbox" checked></label>
+  <label class="field"><span>Repères (sol, axe)</span><input id="guides" type="checkbox" checked></label></section>
+ <section class="panel"><h2>Enregistrer et exporter</h2>
+  <div class="buttons"><button id="undo">Annuler</button><button id="redo">Rétablir</button><button id="reset-phase">Réinitialiser la phase</button></div>
+  <p class="small">Chaque modification est enregistrée dans ce navigateur et utilisée par saut.html.</p>
+  <div class="buttons"><button id="export-phase" class="primary">PNG de la phase</button><button id="export-sheet">Planche des 4 phases</button><button id="export-all">4 PNG séparés</button></div>
+  <p class="small">Les PNG ont tous la même taille et le personnage garde sa place d'une phase à l'autre.</p>
+  <div class="buttons"><button id="save-file">Télécharger collage-data.js</button><button id="load-file">Importer…</button><input id="file" type="file" accept=".js,.json" hidden></div>
+  <p class="small">Pour garder les réglages partout, place <b>collage-data.js</b> dans <b>assets/jump</b>.</p>
+  <div id="status" role="status"></div><p id="error" role="alert"></p></section>
+</aside></div></main>
+<script src="assets/jump/bundle.js?v=8"></script><script src="assets/jump/collage-data.js" onerror="this.remove()"></script><script src="collage.js?v=1"></script><script src="editeur.js?v=1"></script></body></html>

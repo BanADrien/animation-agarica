@@ -1,0 +1,14 @@
+{
+  "sourceVsRestDifferingChannels": 0,
+  "walkAndAttack": {
+    "cape": 0,
+    "lower": 2,
+    "torso": 2,
+    "head": "base",
+    "eyes": "base",
+    "hair": 0
+  },
+  "attackDoesNotResetLocomotion": true,
+  "attackEndsWithoutStoppingWalk": true,
+  "browserErrors": 0
+}

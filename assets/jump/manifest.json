@@ -1,0 +1,782 @@
+{
+  "version": 4,
+  "scope": "jump-only",
+  "width": 1600,
+  "height": 1700,
+  "sourceOffset": [
+    160,
+    320
+  ],
+  "order": [
+    "cape",
+    "lower",
+    "torso",
+    "head",
+    "eyes",
+    "hair"
+  ],
+  "phases": [
+    {
+      "id": "appui",
+      "label": "Appui"
+    },
+    {
+      "id": "montee",
+      "label": "Montée"
+    },
+    {
+      "id": "apogee",
+      "label": "Apogée"
+    },
+    {
+      "id": "chute",
+      "label": "Chute"
+    }
+  ],
+  "frames": {
+    "cape": [
+      {
+        "file": "assets/jump/poses/cape/appui.png",
+        "x": 470,
+        "y": 979,
+        "w": 346,
+        "h": 404,
+        "count": 67758,
+        "anchor": [
+          785,
+          1010
+        ]
+      },
+      {
+        "file": "assets/jump/poses/cape/montee.png",
+        "x": 613,
+        "y": 840,
+        "w": 171,
+        "h": 466,
+        "count": 48213,
+        "anchor": [
+          755,
+          870
+        ]
+      },
+      {
+        "file": "assets/jump/poses/cape/apogee.png",
+        "x": 369,
+        "y": 822,
+        "w": 395,
+        "h": 254,
+        "count": 59748,
+        "anchor": [
+          735,
+          870
+        ]
+      },
+      {
+        "file": "assets/jump/poses/cape/chute.png",
+        "x": 485,
+        "y": 615,
+        "w": 330,
+        "h": 340,
+        "count": 56138,
+        "anchor": [
+          795,
+          940
+        ]
+      }
+    ],
+    "lower": [
+      {
+        "file": "assets/jump/poses/lower/appui.png",
+        "x": 628,
+        "y": 1112,
+        "w": 464,
+        "h": 357,
+        "count": 117371,
+        "anchor": [
+          885,
+          1134
+        ]
+      },
+      {
+        "file": "assets/jump/poses/lower/montee.png",
+        "x": 664,
+        "y": 991,
+        "w": 402,
+        "h": 495,
+        "count": 131777,
+        "anchor": [
+          885,
+          1014
+        ]
+      },
+      {
+        "file": "assets/jump/poses/lower/apogee.png",
+        "x": 668,
+        "y": 991,
+        "w": 396,
+        "h": 456,
+        "count": 118387,
+        "anchor": [
+          885,
+          1014
+        ]
+      },
+      {
+        "file": "assets/jump/poses/lower/chute.png",
+        "x": 667,
+        "y": 991,
+        "w": 415,
+        "h": 473,
+        "count": 131288,
+        "anchor": [
+          885,
+          1014
+        ]
+      }
+    ],
+    "torso": [
+      {
+        "file": "assets/jump/poses/torso/appui.png",
+        "x": 539,
+        "y": 897,
+        "w": 490,
+        "h": 346,
+        "count": 81353,
+        "anchor": [
+          876,
+          930
+        ]
+      },
+      {
+        "file": "assets/jump/poses/torso/montee.png",
+        "x": 580,
+        "y": 776,
+        "w": 491,
+        "h": 380,
+        "count": 83164,
+        "anchor": [
+          884,
+          810
+        ]
+      },
+      {
+        "file": "assets/jump/poses/torso/apogee.png",
+        "x": 517,
+        "y": 776,
+        "w": 675,
+        "h": 274,
+        "count": 95211,
+        "anchor": [
+          879,
+          810
+        ]
+      },
+      {
+        "file": "assets/jump/poses/torso/chute.png",
+        "x": 615,
+        "y": 634,
+        "w": 537,
+        "h": 491,
+        "count": 112333,
+        "anchor": [
+          876,
+          810
+        ]
+      }
+    ],
+    "head": [
+      {
+        "file": "assets/jump/poses/head/appui.png",
+        "x": 729,
+        "y": 676,
+        "w": 295,
+        "h": 281,
+        "count": 57416,
+        "anchor": [
+          892,
+          931
+        ]
+      },
+      {
+        "file": "assets/jump/poses/head/montee.png",
+        "x": 724,
+        "y": 554,
+        "w": 295,
+        "h": 281,
+        "count": 57416,
+        "anchor": [
+          887,
+          809
+        ]
+      },
+      {
+        "file": "assets/jump/poses/head/apogee.png",
+        "x": 719,
+        "y": 555,
+        "w": 295,
+        "h": 281,
+        "count": 57416,
+        "anchor": [
+          882,
+          810
+        ]
+      },
+      {
+        "file": "assets/jump/poses/head/chute.png",
+        "x": 726,
+        "y": 554,
+        "w": 295,
+        "h": 281,
+        "count": 57416,
+        "anchor": [
+          889,
+          809
+        ]
+      }
+    ],
+    "eyes": [
+      {
+        "file": "assets/jump/poses/eyes/appui.png",
+        "x": 796,
+        "y": 750,
+        "w": 224,
+        "h": 86,
+        "count": 9769,
+        "anchor": [
+          902,
+          802
+        ]
+      },
+      {
+        "file": "assets/jump/poses/eyes/montee.png",
+        "x": 777,
+        "y": 619,
+        "w": 236,
+        "h": 104,
+        "count": 12989,
+        "anchor": [
+          900,
+          678
+        ]
+      },
+      {
+        "file": "assets/jump/poses/eyes/apogee.png",
+        "x": 759,
+        "y": 617,
+        "w": 237,
+        "h": 104,
+        "count": 13480,
+        "anchor": [
+          891,
+          676
+        ]
+      },
+      {
+        "file": "assets/jump/poses/eyes/chute.png",
+        "x": 795,
+        "y": 637,
+        "w": 225,
+        "h": 78,
+        "count": 9589,
+        "anchor": [
+          901,
+          681
+        ]
+      }
+    ],
+    "hair": [
+      {
+        "file": "assets/jump/poses/hair/appui.png",
+        "x": 502,
+        "y": 530,
+        "w": 656,
+        "h": 573,
+        "count": 215109,
+        "anchor": [
+          862,
+          536
+        ]
+      },
+      {
+        "file": "assets/jump/poses/hair/montee.png",
+        "x": 577,
+        "y": 404,
+        "w": 544,
+        "h": 695,
+        "count": 224277,
+        "anchor": [
+          860,
+          412
+        ]
+      },
+      {
+        "file": "assets/jump/poses/hair/apogee.png",
+        "x": 454,
+        "y": 404,
+        "w": 771,
+        "h": 532,
+        "count": 213372,
+        "anchor": [
+          851,
+          410
+        ]
+      },
+      {
+        "file": "assets/jump/poses/hair/chute.png",
+        "x": 491,
+        "y": 154,
+        "w": 719,
+        "h": 729,
+        "count": 262073,
+        "anchor": [
+          861,
+          415
+        ]
+      }
+    ]
+  },
+  "registration": {
+    "hair": {
+      "scale": 1.7,
+      "target": [
+        694,
+        92
+      ],
+      "rects": [
+        [
+          20,
+          70,
+          475,
+          440
+        ],
+        [
+          515,
+          65,
+          480,
+          445
+        ],
+        [
+          1000,
+          60,
+          536,
+          450
+        ],
+        [
+          20,
+          530,
+          475,
+          480
+        ],
+        [
+          515,
+          530,
+          480,
+          480
+        ],
+        [
+          1000,
+          530,
+          536,
+          480
+        ]
+      ],
+      "anchors": [
+        [
+          281,
+          124
+        ],
+        [
+          778,
+          102
+        ],
+        [
+          1286,
+          125
+        ],
+        [
+          277,
+          690
+        ],
+        [
+          788,
+          690
+        ],
+        [
+          1288,
+          690
+        ]
+      ]
+    },
+    "torso": {
+      "scale": 1.28,
+      "target": [
+        721,
+        490
+      ],
+      "rects": [
+        [
+          25,
+          128,
+          450,
+          350
+        ],
+        [
+          527,
+          128,
+          414,
+          350
+        ],
+        [
+          970,
+          128,
+          565,
+          350
+        ],
+        [
+          45,
+          550,
+          460,
+          450
+        ],
+        [
+          526,
+          560,
+          485,
+          440
+        ],
+        [
+          1014,
+          560,
+          521,
+          440
+        ]
+      ],
+      "anchors": [
+        [
+          313,
+          175
+        ],
+        [
+          779,
+          173
+        ],
+        [
+          1268,
+          173
+        ],
+        [
+          277,
+          701
+        ],
+        [
+          777,
+          701
+        ],
+        [
+          1252,
+          701
+        ]
+      ]
+    },
+    "lower": {
+      "scale": 1.3,
+      "target": [
+        725,
+        694
+      ],
+      "rects": [
+        [
+          20,
+          70,
+          475,
+          440
+        ],
+        [
+          515,
+          65,
+          480,
+          445
+        ],
+        [
+          1000,
+          60,
+          536,
+          450
+        ],
+        [
+          20,
+          530,
+          475,
+          480
+        ],
+        [
+          515,
+          530,
+          480,
+          480
+        ],
+        [
+          1000,
+          530,
+          536,
+          480
+        ]
+      ],
+      "anchors": [
+        [
+          297,
+          218
+        ],
+        [
+          782,
+          109
+        ],
+        [
+          1296,
+          89
+        ],
+        [
+          297,
+          583
+        ],
+        [
+          785,
+          583
+        ],
+        [
+          1291,
+          583
+        ]
+      ]
+    },
+    "head": {
+      "scale": 0.85,
+      "target": [
+        721,
+        489
+      ],
+      "rects": [
+        [
+          20,
+          70,
+          475,
+          440
+        ],
+        [
+          515,
+          65,
+          480,
+          445
+        ],
+        [
+          1000,
+          60,
+          536,
+          450
+        ],
+        [
+          20,
+          530,
+          475,
+          480
+        ],
+        [
+          515,
+          530,
+          480,
+          480
+        ],
+        [
+          1000,
+          530,
+          536,
+          480
+        ]
+      ],
+      "anchors": [
+        [
+          270,
+          435
+        ],
+        [
+          787,
+          412
+        ],
+        [
+          1268,
+          423
+        ],
+        [
+          262,
+          906
+        ],
+        [
+          764,
+          906
+        ],
+        [
+          1268,
+          906
+        ]
+      ]
+    },
+    "eyes": {
+      "scale": 0.76,
+      "target": [
+        734,
+        358
+      ],
+      "rects": [
+        [
+          70,
+          210,
+          365,
+          180
+        ],
+        [
+          580,
+          190,
+          365,
+          180
+        ],
+        [
+          1070,
+          190,
+          445,
+          180
+        ],
+        [
+          70,
+          680,
+          365,
+          175
+        ],
+        [
+          580,
+          680,
+          365,
+          175
+        ],
+        [
+          1070,
+          680,
+          445,
+          175
+        ]
+      ],
+      "anchors": [
+        [
+          248,
+          303
+        ],
+        [
+          780,
+          281
+        ],
+        [
+          1285,
+          281
+        ],
+        [
+          248,
+          770
+        ],
+        [
+          756,
+          776
+        ],
+        [
+          1265,
+          776
+        ]
+      ]
+    },
+    "cape": {
+      "scale": 1.05,
+      "target": [
+        555,
+        550
+      ],
+      "rects": [
+        [
+          15,
+          170,
+          385,
+          440
+        ],
+        [
+          495,
+          170,
+          240,
+          485
+        ],
+        [
+          780,
+          155,
+          420,
+          295
+        ],
+        [
+          40,
+          660,
+          365,
+          390
+        ],
+        [
+          419,
+          685,
+          390,
+          365
+        ],
+        [
+          835,
+          660,
+          370,
+          390
+        ]
+      ],
+      "anchors": [
+        [
+          342,
+          229
+        ],
+        [
+          668,
+          228
+        ],
+        [
+          1154,
+          227
+        ],
+        [
+          362,
+          994
+        ],
+        [
+          753,
+          996
+        ],
+        [
+          895,
+          983
+        ]
+      ]
+    }
+  },
+  "source": "image.png",
+  "notes": "Four drawn jump poses per component (the two wind variants of the sheets are unused). Fixed per-sheet scale; registration is baked into PNG offsets.",
+  "frontArmRegions": [
+    [
+      490,
+      550,
+      280,
+      300
+    ],
+    [
+      1040,
+      550,
+      300,
+      300
+    ]
+  ]
+}
