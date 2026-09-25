@@ -1,6 +1,8 @@
 // Register the six imagegen sheets. No runtime warping or limb rotations.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const {read,write,blank}=require('./png.cjs');process.chdir(path.resolve(__dirname,'..'));
+// Regenerating overwrites assets/jump/poses, including drawings retouched by hand: ask for --force.
+if(fs.existsSync('assets/jump/poses')&&!process.argv.includes('--force')){console.error('Ce script réécrit toutes les images de assets/jump/poses à partir des planches et efface les retouches.\nPour recharger des images retouchées : node tools/refresh-jump.cjs (ou mettre-a-jour-images.bat).\nPour tout régénérer quand même : node tools/build-jump.cjs --force');process.exit(1);}
 // One head drawing (the Montée cell) for every phase so the hair always fits the same skull; HEAD puts its chin on each neck.
 const HEAD_CELL=1,HEAD=[[11,2],[6,0],[1,1],[8,0],[3,0]];
 const EYES=[[0,0],[0,0],[0,0],[0,0],[0,0]],CAPE=[[70,20],[40,0],[20,0],[80,70],[80,70]];

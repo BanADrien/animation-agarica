@@ -31,3 +31,20 @@ La fidélité exacte est vérifiée pour la pose originale. Les dessins génér�
 Le contrôle compare les pixels après décodage dans le navigateur : **0 canal différent** entre l’image source et les six couches recomposées. Résultats : `previews/verification.json`.
 
 L’ancien `personnage-atlas.png` est conservé mais n’est plus utilisé par la démo.
+
+## Éditeur de collage : garder les calques
+
+**editeur.html** place chaque membre (position, taille, ordre) phase par phase. **Exporter les positions (JSON)** produit `saut-positions.json` sans fusionner les calques. Pour chaque phase et chaque membre, le fichier indique l’image à utiliser (dans `assets/jump/poses`), le coin haut-gauche `x, y`, la taille affichée `largeur, hauteur`, l’`echelle` et l’ordre `z` (0 = derrière). Les coordonnées sont celles d’un canevas commun de 1600 × 1700, identique pour toutes les phases. `brasDevant` décrit la copie du torse limitée aux bras, dessinée tout devant pendant la chute. **Importer…** relit ce fichier. L’export PNG aplati reste disponible dans un menu replié.
+
+**Image de référence** : affiche un sprite fini en transparence, derrière ou devant les membres, pour les placer contre lui. On choisit le personnage original ou n’importe quelle image ; **Caler sur le personnage** l’ajuste à la hauteur et aux pieds du personnage. Elle peut être la même pour toutes les phases ou différente pour chacune. Elle n’est jamais exportée.
+
+## Retoucher un calque (Pixelorama ou autre)
+
+**Avec le bouton** : double-cliquer une fois sur **installer-pixelorama.bat** (il trouve Pixelorama ou demande où il est). Ensuite, dans l’éditeur, **✏️ Modifier dans Pixelorama** ouvre le dessin du membre choisi. Chaque fois que le PNG est réenregistré au même endroit, les images sont mises à jour ; en revenant dans l’éditeur, il les recharge seul. Le lien n’ouvre que les PNG de `assets/jump/poses`. Pour le retirer : `powershell -ExecutionPolicy Bypass -File toolspixeloramainstaller.ps1 -Remove`.
+
+**À la main** :
+
+1. Ouvrir le PNG du membre dans `assets/jump/poses/<membre>/<phase>.png`, le retoucher, l’enregistrer au même endroit, en PNG.
+2. Double-cliquer sur **mettre-a-jour-images.bat**, puis recharger l’éditeur avec **Ctrl + F5**.
+
+Les pages lisent les images dans `assets/jump/bundle.js`, pas directement dans les PNG : sans l’étape 2, la retouche n’apparaît pas. Si la toile a été agrandie vers la gauche ou le haut, recaler le membre dans l’éditeur. `tools/build-jump.cjs` régénère toutes les poses depuis les planches et efface les retouches : il refuse de le faire sans `--force`.

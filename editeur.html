@@ -17,7 +17,7 @@ button,select,input{font:inherit}button,select{color:var(--text);background:#2b4
 <section class="stage">
  <div class="toolbar"><div class="buttons" id="phases" role="tablist" aria-label="Phases"></div><span class="sep"></span><button id="play">▶ Aperçu</button><label class="small">Zoom <input id="zoom" type="range" min="0.25" max="2" step="0.05" value="0.55"></label></div>
  <div class="viewport" id="viewport"><canvas id="stage" aria-label="Collage de la phase"></canvas></div>
- <div class="hint">Clique sur un membre pour le choisir, fais-le glisser pour le déplacer. Flèches : 1 px (Maj : 10 px). Ctrl+Z / Ctrl+Y : annuler / rétablir. Touches 1 à 4 : changer de phase.</div>
+ <div class="hint">Clique sur un membre pour le choisir, fais-le glisser pour le déplacer. Flèches : 1 px (Maj : 10 px). Coins du cadre ou touches + / − : taille (Page ↑ / Page ↓ : 10 %). Ctrl+Z / Ctrl+Y : annuler / rétablir. Touches 1 à 4 : changer de phase.</div>
 </section>
 <aside>
  <section class="panel"><h2>Couches <span class="small">(en haut = devant)</span></h2><ul class="layers" id="layers"></ul>
@@ -26,7 +26,23 @@ button,select,input{font:inherit}button,select{color:var(--text);background:#2b4
   <label class="field"><span>Dessin utilisé</span><select id="src"></select></label>
   <label class="field"><span>Décalage X</span><input id="dx" type="number" step="1"></label>
   <label class="field"><span>Décalage Y</span><input id="dy" type="number" step="1"></label>
-  <div class="buttons"><button id="reset-layer">Remettre à zéro</button><button id="copy-prev">Copier de la phase précédente</button><button id="copy-all">Appliquer à toutes les phases</button></div></section>
+  <label class="field"><span>Taille (%)</span><input id="size" type="number" min="10" max="400" step="1"></label>
+  <input id="size-range" type="range" min="25" max="250" step="1" aria-label="Taille" style="width:100%">
+  <label class="field"><span>Même taille dans toutes les phases</span><input id="link-size" type="checkbox"></label>
+  <div class="buttons"><button id="reset-layer">Remettre à zéro</button><button id="copy-prev">Copier de la phase précédente</button><button id="copy-all">Appliquer à toutes les phases</button></div>
+  <div class="buttons" style="margin-top:10px"><button id="edit-image">✏️ Modifier dans Pixelorama</button><button id="reload-images">↻ Recharger les images</button></div>
+  <p class="small">Enregistre le PNG au même endroit dans Pixelorama (Exporter, en écrasant le fichier), puis reviens ici : l'image se met à jour. Première fois : double-clique sur <b>installer-pixelorama.bat</b>.</p></section>
+ <section class="panel"><h2>Image de référence</h2>
+  <label class="field"><span>Image</span><select id="ref-src"><option value="">Aucune</option><option value="image.png">Personnage original</option></select></label>
+  <div class="buttons"><button id="ref-load">Choisir une image…</button><button id="ref-fit">Caler sur le personnage</button><input id="ref-file" type="file" accept="image/*" hidden></div>
+  <label class="field"><span>Opacité</span><input id="ref-alpha" type="range" min="0.05" max="1" step="0.05" value="0.35"></label>
+  <label class="field"><span>Devant les membres</span><input id="ref-front" type="checkbox"></label>
+  <label class="field"><span>Position X</span><input id="ref-x" type="number" step="1"></label>
+  <label class="field"><span>Position Y</span><input id="ref-y" type="number" step="1"></label>
+  <label class="field"><span>Taille (%)</span><input id="ref-size" type="number" min="1" step="1"></label>
+  <label class="field"><span>Déplacer la référence à la souris</span><input id="ref-move" type="checkbox"></label>
+  <label class="field"><span>Même référence pour toutes les phases</span><input id="ref-shared" type="checkbox" checked></label>
+  <p class="small">La référence sert seulement de guide : elle n'est ni exportée ni affichée dans saut.html.</p></section>
  <section class="panel"><h2>Aides</h2>
   <label class="field"><span>Phase précédente en transparence</span><input id="onion" type="checkbox" checked></label>
   <label class="field"><span>Opacité</span><input id="onion-alpha" type="range" min="0.1" max="0.8" step="0.05" value="0.3"></label>
@@ -35,10 +51,11 @@ button,select,input{font:inherit}button,select{color:var(--text);background:#2b4
  <section class="panel"><h2>Enregistrer et exporter</h2>
   <div class="buttons"><button id="undo">Annuler</button><button id="redo">Rétablir</button><button id="reset-phase">Réinitialiser la phase</button></div>
   <p class="small">Chaque modification est enregistrée dans ce navigateur et utilisée par saut.html.</p>
-  <div class="buttons"><button id="export-phase" class="primary">PNG de la phase</button><button id="export-sheet">Planche des 4 phases</button><button id="export-all">4 PNG séparés</button></div>
-  <p class="small">Les PNG ont tous la même taille et le personnage garde sa place d'une phase à l'autre.</p>
+  <div class="buttons"><button id="export-json" class="primary">Exporter les positions (JSON)</button></div>
+  <p class="small">Les calques restent séparés : le fichier donne, pour chaque phase, l'image de chaque membre, sa position, sa taille et son ordre. Les images sont dans <b>assets/jump/poses</b>.</p>
   <div class="buttons"><button id="save-file">Télécharger collage-data.js</button><button id="load-file">Importer…</button><input id="file" type="file" accept=".js,.json" hidden></div>
-  <p class="small">Pour garder les réglages partout, place <b>collage-data.js</b> dans <b>assets/jump</b>.</p>
+  <p class="small">« Importer » lit collage-data.js ou saut-positions.json. Pour garder les réglages dans saut.html partout, place <b>collage-data.js</b> dans <b>assets/jump</b>.</p>
+  <details class="small"><summary>Image aplatie en PNG (fusionne les calques)</summary><div class="buttons" style="margin-top:8px"><button id="export-phase">PNG de la phase</button><button id="export-sheet">Planche des 4 phases</button><button id="export-all">4 PNG séparés</button></div></details>
   <div id="status" role="status"></div><p id="error" role="alert"></p></section>
 </aside></div></main>
-<script src="assets/jump/bundle.js?v=8"></script><script src="assets/jump/collage-data.js" onerror="this.remove()"></script><script src="collage.js?v=1"></script><script src="editeur.js?v=1"></script></body></html>
+<script src="assets/jump/bundle.js?v=8"></script><script src="assets/jump/collage-data.js" onerror="this.remove()"></script><script src="collage.js?v=2"></script><script src="editeur.js?v=5"></script></body></html>
