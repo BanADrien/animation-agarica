@@ -1,5 +1,5 @@
-﻿# Opens a jump pose PNG in Pixelorama. Called by Windows for links "pixelorama-edit:<path>" (see installer.ps1).
-# While Pixelorama runs, every save of the PNG reloads the images of the pages (tools/refresh-jump.cjs).
+﻿# Opens a pose PNG (jump, idle, attack) in Pixelorama. Called by Windows for links "pixelorama-edit:<path>" (see installer.ps1).
+# While Pixelorama runs, every save of the PNG reloads the images of the pages (tools/refresh-jump.cjs for the jump, tools/build-poses.py otherwise).
 param([string]$Url)
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [Text.Encoding]::UTF8
@@ -7,11 +7,11 @@ $root = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $log = Join-Path $PSScriptRoot 'journal.txt'
 function Say($text) { Add-Type -AssemblyName System.Windows.Forms; [void][System.Windows.Forms.MessageBox]::Show($text, 'Modifier dans Pixelorama') }
 try {
-  # Any web page could use this link: only open PNG files of assets\jump\poses, nothing else.
+  # Any web page could use this link: only open PNG files of assets\<jump|idle|attack>\poses, nothing else.
   $rel = [uri]::UnescapeDataString(($Url -replace '^pixelorama-edit:(//)?', '')).TrimEnd('/').Replace('/', '\')
-  $poses = Join-Path $root 'assets\jump\poses\'
   $file = [IO.Path]::GetFullPath((Join-Path $root $rel))
-  if (-not $file.StartsWith($poses, [StringComparison]::OrdinalIgnoreCase) -or [IO.Path]::GetExtension($file) -ne '.png' -or -not (Test-Path -LiteralPath $file)) { Say "Image refusée : $rel"; exit 1 }
+  $folder = 'jump', 'idle', 'attack' | Where-Object { $file.StartsWith((Join-Path $root "assets\$_\poses\"), [StringComparison]::OrdinalIgnoreCase) } | Select-Object -First 1
+  if (-not $folder -or [IO.Path]::GetExtension($file) -ne '.png' -or -not (Test-Path -LiteralPath $file)) { Say "Image refusée : $rel"; exit 1 }
   $exeFile = Join-Path $PSScriptRoot 'chemin.txt'
   $exe = if (Test-Path $exeFile) { (Get-Content $exeFile -Raw).Trim() } else { '' }
   if (-not $exe -or -not (Test-Path -LiteralPath $exe)) { Say "Pixelorama est introuvable. Relance installer-pixelorama.bat."; exit 1 }
@@ -27,7 +27,7 @@ try {
     if ($now -ne $last) {
       Start-Sleep -Milliseconds 700  # let Pixelorama finish writing
       $last = (Get-Item -LiteralPath $file).LastWriteTimeUtc
-      $out = & node (Join-Path $root 'tools\refresh-jump.cjs') 2>&1
+      $out = if ($folder -eq 'jump') { & node (Join-Path $root 'tools\refresh-jump.cjs') 2>&1 } else { & python (Join-Path $root 'tools\build-poses.py') $folder 2>&1 }
       Add-Content $log "$(Get-Date -Format s) $rel`r`n$($out -join "`r`n")"
     }
   }

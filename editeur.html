@@ -12,16 +12,19 @@ button,select,input{font:inherit}button,select{color:var(--text);background:#2b4
 .small{font-size:12px;color:var(--muted)}#status{min-height:1.4em;color:var(--green);font-size:12px}#error{color:#ffc3aa}
 @media(max-width:900px){.layout{grid-template-columns:1fr}.viewport{height:70vh}}@media(max-width:540px){main{padding:12px}}
 </style></head><body><main>
-<header><div><div class="eyebrow">SAUT · COLLAGE DES MEMBRES</div><h1>Placer chaque membre, phase par phase</h1></div><div class="buttons"><a href="saut.html">← Revenir au saut</a></div></header>
+<header><div><div class="eyebrow">COLLAGE DES MEMBRES · SAUT, IDLE, ATTAQUE</div><h1>Placer chaque membre, phase par phase</h1></div><div class="buttons"><a href="saut.html">← Revenir au saut</a></div></header>
 <div class="layout">
 <section class="stage">
- <div class="toolbar"><div class="buttons" id="phases" role="tablist" aria-label="Phases"></div><span class="sep"></span><button id="play">▶ Aperçu</button><label class="small">Zoom <input id="zoom" type="range" min="0.25" max="2" step="0.05" value="0.55"></label></div>
+ <div class="toolbar"><select id="animation" aria-label="Animation"></select><div class="buttons" id="phases" role="tablist" aria-label="Phases"></div><span class="sep"></span><button id="play">▶ Aperçu</button><label class="small">Zoom <input id="zoom" type="range" min="0.25" max="2" step="0.05" value="0.55"></label></div>
  <div class="viewport" id="viewport"><canvas id="stage" aria-label="Collage de la phase"></canvas></div>
  <div class="hint">Clique sur un membre pour le choisir, fais-le glisser pour le déplacer. Flèches : 1 px (Maj : 10 px). Coins du cadre ou touches + / − : taille (Page ↑ / Page ↓ : 10 %). Ctrl+Z / Ctrl+Y : annuler / rétablir. Touches 1 à 4 : changer de phase.</div>
 </section>
 <aside>
  <section class="panel"><h2>Couches <span class="small">(en haut = devant)</span></h2><ul class="layers" id="layers"></ul>
-  <label class="field"><span>Bras du torse devant la tête et les cheveux</span><input id="front-arms" type="checkbox"></label></section>
+  <label class="field"><span>Bras du torse devant la tête et les cheveux</span><input id="front-arms" type="checkbox"></label>
+  <label class="field"><span>Agrandir tout le personnage (%)</span><input id="scale-all" type="number" min="10" max="400" step="1" value="110"></label>
+  <div class="buttons"><button id="scale-all-apply">Appliquer à toutes les phases</button></div>
+  <p class="small">Tous les membres grandissent ensemble autour du point au sol (repères) : proportions et écarts gardés, comme une image agrandie. 110 = +10 %, 90 = −10 %.</p></section>
  <section class="panel" id="detail"><h2 id="detail-title">Membre</h2>
   <label class="field"><span>Dessin utilisé</span><select id="src"></select></label>
   <label class="field"><span>Décalage X</span><input id="dx" type="number" step="1"></label>
@@ -50,12 +53,15 @@ button,select,input{font:inherit}button,select{color:var(--text);background:#2b4
   <label class="field"><span>Repères (sol, axe)</span><input id="guides" type="checkbox" checked></label></section>
  <section class="panel"><h2>Enregistrer et exporter</h2>
   <div class="buttons"><button id="undo">Annuler</button><button id="redo">Rétablir</button><button id="reset-phase">Réinitialiser la phase</button></div>
-  <p class="small">Chaque modification est enregistrée dans ce navigateur et utilisée par saut.html.</p>
-  <div class="buttons"><button id="export-json" class="primary">Exporter les positions (JSON)</button></div>
-  <p class="small">Les calques restent séparés : le fichier donne, pour chaque phase, l'image de chaque membre, sa position, sa taille et son ordre. Les images sont dans <b>assets/jump/poses</b>.</p>
-  <div class="buttons"><button id="save-file">Télécharger collage-data.js</button><button id="load-file">Importer…</button><input id="file" type="file" accept=".js,.json" hidden></div>
-  <p class="small">« Importer » lit collage-data.js ou saut-positions.json. Pour garder les réglages dans saut.html partout, place <b>collage-data.js</b> dans <b>assets/jump</b>.</p>
-  <details class="small"><summary>Image aplatie en PNG (fusionne les calques)</summary><div class="buttons" style="margin-top:8px"><button id="export-phase">PNG de la phase</button><button id="export-sheet">Planche des 4 phases</button><button id="export-all">4 PNG séparés</button></div></details>
+  <p class="small">Chaque modification est enregistrée dans ce navigateur et utilisée par saut.html et index.html.</p>
+  <div class="buttons"><button id="link-project" class="primary">Mettre à jour le JSON…</button><button id="change-project" hidden>Changer de dossier…</button></div>
+  <p class="small" id="project-state">Choisir le dossier <b>animation-agarica</b> : chaque modification met alors à jour <b>personnage.json</b> (toutes les animations du personnage) et les <b>collage-data.js</b>. Chrome ou Edge.</p>
+  <label class="field"><span>Nom du personnage</span><input id="character" type="text" value="agarica" spellcheck="false"></label>
+  <div class="buttons"><button id="export-folder">Exporter toutes les animations…</button></div>
+  <p class="small">Choisir où créer le dossier : il reçoit <b>animations.json</b> et les PNG des calques rangés par animation, calques séparés, pour le jeu.</p>
+  <details class="small"><summary>Autres enregistrements</summary><div class="buttons" style="margin-top:8px"><button id="load-file">Importer…</button><input id="file" type="file" accept=".js,.json" hidden><button id="save-file">Télécharger collage-data.js</button></div>
+  <p>« Importer » lit personnage.json, collage-data.js ou un ancien saut-positions.json.</p>
+  <p>Image aplatie en PNG (fusionne les calques) :</p><div class="buttons"><button id="export-phase">PNG de la phase</button><button id="export-sheet">Planche des 4 phases</button><button id="export-all">4 PNG séparés</button></div></details>
   <div id="status" role="status"></div><p id="error" role="alert"></p></section>
 </aside></div></main>
-<script src="assets/jump/bundle.js?v=8"></script><script src="assets/jump/collage-data.js" onerror="this.remove()"></script><script src="collage.js?v=2"></script><script src="editeur.js?v=5"></script></body></html>
+<script src="assets/jump/bundle.js?v=8"></script><script src="assets/jump/collage-data.js" onerror="this.remove()"></script><script src="assets/idle/bundle.js" onerror="this.remove()"></script><script src="assets/idle/collage-data.js" onerror="this.remove()"></script><script src="assets/attack/bundle.js" onerror="this.remove()"></script><script src="assets/attack/collage-data.js" onerror="this.remove()"></script><script src="collage.js?v=4"></script><script src="editeur.js?v=7"></script></body></html>
